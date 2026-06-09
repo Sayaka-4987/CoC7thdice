@@ -219,6 +219,11 @@ const App = () => {
     return tarotCards[index]
   }
 
+  const getTarotCardId = (cardText) => {
+    const match = cardText.match(/【(\d+)】/)
+    return match ? match[1] : cardText
+  }
+
   // 单张塔罗牌
   const DrawSingleTarotCard = () => {
     let i = randomNumber(tarotCards.length) - 1
@@ -227,19 +232,18 @@ const App = () => {
 
   // 抽 n 张不重复的牌
   const DrawNonRepeatCards = (n) => {
-    let subArr = new Array(tarotCards.length)
-    let res = new Array(n)
-    for (let i = 0; i < n; i++) {
-      let rand = randomNumber(tarotCards.length) - 1
-      if (subArr[rand] !== 999) {
-        // 这张牌未使用
-        res[i] = rand;
-        subArr[rand] = 999
-      } else {
-        // 这张牌已被使用，重抽
-        i--;
+    const usedCardIds = new Set()
+    const res = []
+
+    while (res.length < n) {
+      const rand = randomNumber(tarotCards.length) - 1
+      const cardId = getTarotCardId(tarotCards[rand])
+      if (!usedCardIds.has(cardId)) {
+        usedCardIds.add(cardId)
+        res.push(rand)
       }
     }
+
     return res
   }
 
@@ -297,7 +301,7 @@ const App = () => {
   }
 
   return (
-    <Layout className="layout" style={{ height: '100%' }}>
+    <Layout className="layout">
       <Space direction='vertical'>
         <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
           <Space size='middle' align='center'>
@@ -437,7 +441,7 @@ const App = () => {
         </Layout>
       </Space>
 
-      <Layout style={{ textAlign: 'center', height: '100%' }} >
+      <Layout style={{ textAlign: 'center', padding: '16px 0 24px' }} >
         <p>
           Copyright © Sayaka-4987 2026<br />
           Powered by React and Ant Design
