@@ -9,7 +9,7 @@
 - 人物卡属性生成 — 按指定属性点总和随机生成 5 组九维属性（可选含幸运），已经设计了避免极端的高属性
 - 掷骰 — 支持 r3 / r4 / r6 / r8 / r10 / r20 / r100，可指定骰子数量
 - 塔罗牌 — 单张抽牌 + 五种牌阵（圣三角、四要素、小十字、六芒星、凯尔特十字）
-- 技能检定 — 预设常用技能或手动输入，支持普通检定 / 困难 50% / 极难 25% 三档难度，自动判定大成功与大失败
+- 技能检定 — 预设常用技能或手动输入，支持普通检定 / 困难 50% / 极难 20% 三档难度，自动判定大成功与大失败
 
 ## 技术栈
 
@@ -32,7 +32,7 @@ A lightweight TRPG dice helper built with React + Ant Design, primarily for Call
 - Character attribute generation — generates 5 sets of 9 characteristics based on a target point total (luck optional); designed to avoid extreme stat values
 - Dice roller — supports r3 / r4 / r6 / r8 / r10 / r20 / r100 with configurable roll count
 - Tarot cards — single draw + five spreads (Sacred Triangle, Four Elements, Little Cross, Six-Pointed Star, Celtic Cross)
-- Skill checks — pick from common skills or type your own; three difficulty tiers (Regular / Hard 50% / Extreme 25%); automatic critical success/fumble detection
+- Skill checks — pick from common skills or type your own; three difficulty tiers (Regular / Hard 50% / Extreme 20%); automatic critical success/fumble detection
 
 ## Tech stack
 
