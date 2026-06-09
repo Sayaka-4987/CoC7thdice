@@ -25,14 +25,14 @@ npm start
 
 ---
 
-A lightweight TRPG dice helper built with React + Ant Design, primarily for **Call of Cthulhu 7th Edition** — but usable wherever you need random numbers. Controls lay out flat on desktop and wrap automatically on mobile.
+A lightweight TRPG dice helper built with React + Ant Design, primarily for Call of Cthulhu 7th Edition — but usable wherever you need random numbers. Controls lay out flat on desktop and wrap automatically on mobile.
 
 ## Features
 
-- **Character attribute generation** — generates 5 sets of 9 characteristics based on a target point total (luck optional); designed to avoid extreme stat values
-- **Dice roller** — supports r3 / r4 / r6 / r8 / r10 / r20 / r100 with configurable roll count
-- **Tarot cards** — single draw + five spreads (Sacred Triangle, Four Elements, Little Cross, Six-Pointed Star, Celtic Cross)
-- **Skill checks** — pick from common skills or type your own; three difficulty tiers (Regular / Hard 50% / Extreme 25%); automatic critical success/fumble detection
+- Character attribute generation — generates 5 sets of 9 characteristics based on a target point total (luck optional); designed to avoid extreme stat values
+- Dice roller — supports r3 / r4 / r6 / r8 / r10 / r20 / r100 with configurable roll count
+- Tarot cards — single draw + five spreads (Sacred Triangle, Four Elements, Little Cross, Six-Pointed Star, Celtic Cross)
+- Skill checks — pick from common skills or type your own; three difficulty tiers (Regular / Hard 50% / Extreme 25%); automatic critical success/fumble detection
 
 ## Tech stack
 
