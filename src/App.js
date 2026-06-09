@@ -326,7 +326,7 @@ const App = () => {
 
           <h2><br />塔罗牌</h2>
           <Space direction='vertical'>
-            <Space>
+            <Space wrap>
               <Button type="primary" onClick={() => { DrawSingleTarotCard() }}>
                 抽 1 张塔罗牌
               </Button>
@@ -336,8 +336,6 @@ const App = () => {
               <Button type="primary" onClick={() => { FourElementsSpread() }}>
                 四要素牌阵
               </Button>
-            </Space>
-            <Space>
               <Button type="primary" onClick={() => { LittleCross() }}>
                 小十字牌阵
               </Button>
@@ -355,7 +353,7 @@ const App = () => {
 
           <h2><br />技能检定</h2>
           <Space direction='vertical'>
-            <Space>
+            <Space wrap>
               技能名称选择
               <Select
                 defaultValue="侦查"
@@ -370,8 +368,6 @@ const App = () => {
               或输入
               <Input allowClear value={skillName} onChange={(e) => { setSkillName(e.target.value) }}
                 style={{ width: '120px' }} ></Input>
-            </Space>
-            <Space>
               数值
               <InputNumber min={1} max={100} value={skillPoint} onChange={setSkillPoint} />
               难度
