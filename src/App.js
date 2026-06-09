@@ -18,6 +18,7 @@ const App = () => {
   const [skillName, setSkillName] = useState("侦查")
   const [skillPointRatio, setSkillRatio] = useState(1.0)
   const [skillRes, setSkillRes] = useState('')
+  const [useHouseRule, setUseHouseRule] = useState(false)
   const skillList = [
     "侦查",
     "聆听",
@@ -204,12 +205,20 @@ const App = () => {
     const isSuccess = diceRes <= skillPoint * skillPointRatio ? true : false
     let result = isSuccess ? '成功' : '失败'
 
-    if (diceRes === 1) {
-      result = '大成功！'
-    } else if (diceRes === 100) {
-      result = '大失败！'
-    } else if (diceRes >= 96 && skillPoint < 50) {
-      result = '大失败！'
+    if (useHouseRule) {
+      if (diceRes <= 5) {
+        result = '大成功！'
+      } else if (diceRes >= 96) {
+        result = '大失败！'
+      }
+    } else {
+      if (diceRes === 1) {
+        result = '大成功！'
+      } else if (diceRes === 100) {
+        result = '大失败！'
+      } else if (diceRes >= 96 && skillPoint < 50) {
+        result = '大失败！'
+      }
     }
     return `您进行了${skillName}${skillPoint * skillPointRatio}检定：1D100=${diceRes}，${result}`
   }
@@ -435,7 +444,18 @@ const App = () => {
                 进行检定
               </Button>
             </Space>
-            <div style={{ fontSize: 'smaller' }}>* 此处大成功大失败采用官方规则，若使用房规可以只取骰子数字为准</div>
+            <Checkbox
+              checked={useHouseRule}
+              onChange={(e) => {
+                setUseHouseRule(e.target.checked)
+                setSkillRes('')
+              }}
+            >
+              使用一般房规（1-5 大成功，96-100 大失败）
+            </Checkbox>
+            <div style={{ fontSize: 'smaller' }}>
+              * 当前规则：{useHouseRule ? '一般房规（1-5 大成功，96-100 大失败）' : '官方规则（1 大成功，100 大失败；技能值低于 50 时，96-100 大失败）'}
+            </div>
             <div>{skillRes}</div>
           </Space>
         </Layout>
