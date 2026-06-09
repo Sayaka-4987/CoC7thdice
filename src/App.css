@@ -13,3 +13,24 @@ h1 {
   width: 100%;
   min-height: 100vh;
 }
+
+/* 让标题栏可以随内容增高，避免移动端标题换行后被裁切 */
+.ant-layout-header {
+  height: auto;
+  min-height: 64px;
+  line-height: 1.4;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  white-space: normal;
+}
+
+@media (max-width: 575px) {
+  .ant-layout-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  h1 {
+    font-size: large;
+  }
+}
