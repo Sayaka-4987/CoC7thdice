@@ -62,7 +62,7 @@ const App = () => {
 
   const skillList = language === 'zh' ? skillListZh : skillListEn
 
-  const [tarotResult, setTarotResult] = useState(language === 'zh' ? `来都来了，抽个牌吧` : `Here you are, draw a card!`)
+  const [tarotResult, setTarotResult] = useState(t('tarotPrompt', language))
   const tarotCards = [
     "【0】愚者（The Fool，0）正位：憧憬自然的地方、毫无目的地前行、喜欢尝试挑战新鲜事物、四处流浪、美好的梦想。",
     "【0】愚者（The Fool，0）逆位：冒险的行动、追求可能性、重视梦想、无视物质的损失、离开家园、过于信赖别人、为出外旅行而烦恼。心情空虚、轻率的恋情、无法长久持续的融洽感、不安的爱情旅程、对婚姻感到束缚、彼此忽冷忽热、不顾众人反对坠入爱河、感情不专一。",
@@ -400,7 +400,11 @@ Final Result: ${SingleTarotCard(cards[9])}`)
             <h1 style={{ margin: 0 }}>{t('title', language)}</h1>
           </Space>
           <Button 
-            onClick={() => setLanguage(language === 'zh' ? 'en' : 'zh')}
+            onClick={() => {
+              const nextLanguage = language === 'zh' ? 'en' : 'zh'
+              setLanguage(nextLanguage)
+              setTarotResult(t('tarotPrompt', nextLanguage))
+            }}
             style={{ marginRight: '20px' }}
           >
             {language === 'zh' ? 'EN' : '中'}
