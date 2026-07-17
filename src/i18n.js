@@ -118,7 +118,7 @@ export const translations = {
 
     // 页脚
     copyright: '© Sayaka-4987 2026',
-    poweredBy: '由 React 和 Ant Design 驱动'
+    poweredBy: 'Powered by React and Ant Design'
   },
   en: {
     // 标题和菜单
