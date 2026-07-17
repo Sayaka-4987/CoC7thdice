@@ -98,27 +98,27 @@ export const translations = {
 
     // 技能列表
     skills: {
-      'spot': 'Spot Hidden',
-      'listen': 'Listen',
-      'libraryUse': 'Library Use',
-      'nativeLanguage': 'Native Language',
-      'climb': 'Climb',
-      'dodge': 'Dodge',
-      'fight': 'Fight',
-      'locksmith': 'Locksmith',
-      'medicine': 'Medicine',
-      'shooting': 'Shooting',
-      'firstAid': 'First Aid',
-      'persuade': 'Persuade',
-      'charm': 'Charm',
-      'tactic': 'Oratory',
-      'intimidate': 'Intimidate',
-      'psychology': 'Psychology'
+      'spot': '侦查',
+      'listen': '聆听',
+      'libraryUse': '图书馆使用',
+      'nativeLanguage': '母语',
+      'climb': '攀爬',
+      'dodge': '闪避',
+      'fight': '斗殴',
+      'locksmith': '锁匠',
+      'medicine': '医学',
+      'shooting': '射击',
+      'firstAid': '急救',
+      'persuade': '说服',
+      'charm': '取悦',
+      'tactic': '话术',
+      'intimidate': '恐吓',
+      'psychology': '心理学'
     },
 
     // 页脚
     copyright: '© Sayaka-4987 2026',
-    poweredBy: 'Powered by React and Ant Design'
+    poweredBy: '由 React 和 Ant Design 驱动'
   },
   en: {
     // 标题和菜单
