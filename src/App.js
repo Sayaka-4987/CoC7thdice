@@ -4,10 +4,12 @@ import { Checkbox, InputNumber, Button, List, Space, Layout, Select, Statistic, 
 import 'moment/locale/zh-cn';
 import './App.css';
 import { Header } from 'antd/lib/layout/layout';
+import { t } from './i18n';
 
 const { Option } = Select;
 
 const App = () => {
+  const [language, setLanguage] = useState('zh')
   const [includeLuck, setIncludeLuck] = useState(true)
   const [attrTotal, setAttrTotal] = useState(425)
   const [attribution, setAttribution] = useState(["", "", "", "", ""])
@@ -15,11 +17,12 @@ const App = () => {
   const [diceValue, setDiceValue] = useState([])
   const [diceMax, setDiceMax] = useState(6)
   const [skillPoint, setSkillPoint] = useState(50)
-  const [skillName, setSkillName] = useState("侦查")
+  const [skillName, setSkillName] = useState(language === 'zh' ? "侦查" : "Spot Hidden")
   const [skillPointRatio, setSkillRatio] = useState(1.0)
   const [skillRes, setSkillRes] = useState('')
   const [useHouseRule, setUseHouseRule] = useState(false)
-  const skillList = [
+  
+  const skillListZh = [
     "侦查",
     "聆听",
     "图书馆使用",
@@ -38,7 +41,28 @@ const App = () => {
     "心理学"
   ]
 
-  const [tarotResult, setTarotResult] = useState(`来都来了，抽个牌吧`)
+  const skillListEn = [
+    "Spot Hidden",
+    "Listen",
+    "Library Use",
+    "Native Language",
+    "Climb",
+    "Dodge",
+    "Fight",
+    "Locksmith",
+    "Medicine",
+    "Shooting",
+    "First Aid",
+    "Persuade",
+    "Charm",
+    "Tactic",
+    "Intimidate",
+    "Psychology"
+  ]
+
+  const skillList = language === 'zh' ? skillListZh : skillListEn
+
+  const [tarotResult, setTarotResult] = useState(language === 'zh' ? `来都来了，抽个牌吧` : `Here you are, draw a card!`)
   const tarotCards = [
     "【0】愚者（The Fool，0）正位：憧憬自然的地方、毫无目的地前行、喜欢尝试挑战新鲜事物、四处流浪、美好的梦想。",
     "【0】愚者（The Fool，0）逆位：冒险的行动、追求可能性、重视梦想、无视物质的损失、离开家园、过于信赖别人、为出外旅行而烦恼。心情空虚、轻率的恋情、无法长久持续的融洽感、不安的爱情旅程、对婚姻感到束缚、彼此忽冷忽热、不顾众人反对坠入爱河、感情不专一。",
@@ -99,12 +123,22 @@ const App = () => {
 
   // 不含运气八维或九维属性字符串格式化
   const toAttrString = (arr) => {
-    if (arr.length === 9) {
-      let res = `力量(STR): ${arr[0]}, 体质(CON): ${arr[1]}, 体型(SIZ): ${arr[2]}, 敏捷(DEX): ${arr[3]}, 外貌(APP): ${arr[4]}, 智力/灵感(INT): ${arr[5]}, 意志(POW): ${arr[6]}, 教育/知识(EDU): ${arr[7]}, 幸运(LUCK): ${arr[8]}`
-      return res
+    if (language === 'zh') {
+      if (arr.length === 9) {
+        let res = `力量(STR): ${arr[0]}, 体质(CON): ${arr[1]}, 体型(SIZ): ${arr[2]}, 敏捷(DEX): ${arr[3]}, 外貌(APP): ${arr[4]}, 智力/灵感(INT): ${arr[5]}, 意志(POW): ${arr[6]}, 教育/知识(EDU): ${arr[7]}, 幸运(LUCK): ${arr[8]}`
+        return res
+      } else {
+        let res = `力量(STR): ${arr[0]}, 体质(CON): ${arr[1]}, 体型(SIZ): ${arr[2]}, 敏捷(DEX): ${arr[3]}, 外貌(APP): ${arr[4]}, 智力/灵感(INT): ${arr[5]}, 意志(POW): ${arr[6]}, 教育/知识(EDU): ${arr[7]}`
+        return res
+      }
     } else {
-      let res = `力量(STR): ${arr[0]}, 体质(CON): ${arr[1]}, 体型(SIZ): ${arr[2]}, 敏捷(DEX): ${arr[3]}, 外貌(APP): ${arr[4]}, 智力/灵感(INT): ${arr[5]}, 意志(POW): ${arr[6]}, 教育/知识(EDU): ${arr[7]}`
-      return res
+      if (arr.length === 9) {
+        let res = `STR: ${arr[0]}, CON: ${arr[1]}, SIZ: ${arr[2]}, DEX: ${arr[3]}, APP: ${arr[4]}, INT: ${arr[5]}, POW: ${arr[6]}, EDU: ${arr[7]}, LUCK: ${arr[8]}`
+        return res
+      } else {
+        let res = `STR: ${arr[0]}, CON: ${arr[1]}, SIZ: ${arr[2]}, DEX: ${arr[3]}, APP: ${arr[4]}, INT: ${arr[5]}, POW: ${arr[6]}, EDU: ${arr[7]}`
+        return res
+      }
     }
   }
 
@@ -203,24 +237,29 @@ const App = () => {
   const skillUsingJudge = (skillName, skillPoint, skillPointRatio) => {
     const diceRes = randomNumber(100)
     const isSuccess = diceRes <= skillPoint * skillPointRatio ? true : false
-    let result = isSuccess ? '成功' : '失败'
+    let result = isSuccess ? t('success', language) : t('failure', language)
 
     if (useHouseRule) {
       if (diceRes <= 5) {
-        result = '大成功！'
+        result = t('criticalSuccess', language)
       } else if (diceRes >= 96) {
-        result = '大失败！'
+        result = t('criticalFailure', language)
       }
     } else {
       if (diceRes === 1) {
-        result = '大成功！'
+        result = t('criticalSuccess', language)
       } else if (diceRes === 100) {
-        result = '大失败！'
+        result = t('criticalFailure', language)
       } else if (diceRes >= 96 && skillPoint < 50) {
-        result = '大失败！'
+        result = t('criticalFailure', language)
       }
     }
-    return `您进行了${skillName}${skillPoint * skillPointRatio}检定：1D100=${diceRes}，${result}`
+    
+    if (language === 'zh') {
+      return `您进行了${skillName}${skillPoint * skillPointRatio}检定：1D100=${diceRes}，${result}`
+    } else {
+      return `You performed ${skillName} check at ${skillPoint * skillPointRatio}: 1D100=${diceRes}, ${result}`
+    }
   }
 
   // 返回指定下标的塔罗牌文本
@@ -259,45 +298,76 @@ const App = () => {
   // 圣三角牌阵
   const SacredTriangleSpread = () => {
     let cards = DrawNonRepeatCards(3)
-    setTarotResult(`过去的经验：${SingleTarotCard(cards[0])}
+    if (language === 'zh') {
+      setTarotResult(`过去的经验：${SingleTarotCard(cards[0])}
 问题的现状：${SingleTarotCard(cards[1])}
 将来的预测：${SingleTarotCard(cards[2])}`)
+    } else {
+      setTarotResult(`Past Experience: ${SingleTarotCard(cards[0])}
+Current Situation: ${SingleTarotCard(cards[1])}
+Future Prediction: ${SingleTarotCard(cards[2])}`)
+    }
   }
 
   // 四要素牌阵
   const FourElementsSpread = () => {
     let cards = DrawNonRepeatCards(4)
-    setTarotResult(`火（行动力）：${SingleTarotCard(cards[0])}
+    if (language === 'zh') {
+      setTarotResult(`火（行动力）：${SingleTarotCard(cards[0])}
 水（情感）：${SingleTarotCard(cards[1])}
 土（现实）：${SingleTarotCard(cards[2])}
 风（思想）：${SingleTarotCard(cards[3])}`)
+    } else {
+      setTarotResult(`Fire (Action): ${SingleTarotCard(cards[0])}
+Water (Emotion): ${SingleTarotCard(cards[1])}
+Earth (Reality): ${SingleTarotCard(cards[2])}
+Wind (Thought): ${SingleTarotCard(cards[3])}`)
+    }
   }
 
   // 小十字牌阵
   const LittleCross = () => {
     let cards = DrawNonRepeatCards(4)
-    setTarotResult(`过去：${SingleTarotCard(cards[0])}
+    if (language === 'zh') {
+      setTarotResult(`过去：${SingleTarotCard(cards[0])}
 现在(左)：${SingleTarotCard(cards[1])}
 现在(右)：${SingleTarotCard(cards[2])}
 未来：${SingleTarotCard(cards[3])}`)
+    } else {
+      setTarotResult(`Past: ${SingleTarotCard(cards[0])}
+Present (Left): ${SingleTarotCard(cards[1])}
+Present (Right): ${SingleTarotCard(cards[2])}
+Future: ${SingleTarotCard(cards[3])}`)
+    }
   }
 
   // 六芒星牌阵
   const SixManifoldSpread = () => {
     let cards = DrawNonRepeatCards(7)
-    setTarotResult(`起因：${SingleTarotCard(cards[0])}
+    if (language === 'zh') {
+      setTarotResult(`起因：${SingleTarotCard(cards[0])}
 现状：${SingleTarotCard(cards[1])}
 未来：${SingleTarotCard(cards[2])}
 对策：${SingleTarotCard(cards[3])}
 周遭：${SingleTarotCard(cards[4])}
 态度：${SingleTarotCard(cards[5])}
 结果：${SingleTarotCard(cards[6])}`)
+    } else {
+      setTarotResult(`Origin: ${SingleTarotCard(cards[0])}
+Present: ${SingleTarotCard(cards[1])}
+Future: ${SingleTarotCard(cards[2])}
+Countermeasure: ${SingleTarotCard(cards[3])}
+Surroundings: ${SingleTarotCard(cards[4])}
+Attitude: ${SingleTarotCard(cards[5])}
+Result: ${SingleTarotCard(cards[6])}`)
+    }
   }
 
   // 凯尔特十字牌阵
   const CelticCross = () => {
     let cards = DrawNonRepeatCards(10)
-    setTarotResult(`问题现状：${SingleTarotCard(cards[0])}
+    if (language === 'zh') {
+      setTarotResult(`问题现状：${SingleTarotCard(cards[0])}
 障碍助力：${SingleTarotCard(cards[1])}
 理想状况：${SingleTarotCard(cards[2])}
 基础条件：${SingleTarotCard(cards[3])}
@@ -307,24 +377,42 @@ const App = () => {
 周围环境：${SingleTarotCard(cards[7])}
 希望恐惧：${SingleTarotCard(cards[8])}
 最终结果：${SingleTarotCard(cards[9])}`)
+    } else {
+      setTarotResult(`Question Status: ${SingleTarotCard(cards[0])}
+Obstacle or Help: ${SingleTarotCard(cards[1])}
+Ideal Status: ${SingleTarotCard(cards[2])}
+Basic Condition: ${SingleTarotCard(cards[3])}
+Past Status: ${SingleTarotCard(cards[4])}
+Future Development: ${SingleTarotCard(cards[5])}
+Self Status: ${SingleTarotCard(cards[6])}
+Environment: ${SingleTarotCard(cards[7])}
+Hope or Fear: ${SingleTarotCard(cards[8])}
+Final Result: ${SingleTarotCard(cards[9])}`)
+    }
   }
 
   return (
     <Layout className="layout">
       <Space direction='vertical'>
-        <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+        <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Space size='middle' align='center'>
             <SVG></SVG>
-            <h1 style={{ margin: 0 }}>CoC7th 规则用临时骰子</h1>
+            <h1 style={{ margin: 0 }}>{t('title', language)}</h1>
           </Space>
+          <Button 
+            onClick={() => setLanguage(language === 'zh' ? 'en' : 'zh')}
+            style={{ marginRight: '20px' }}
+          >
+            {language === 'zh' ? 'EN' : '中'}
+          </Button>
         </Header>
         <Layout style={{ padding: '10px 50px' }} className="content">
 
 
-          <h2>人物卡9维属性生成</h2>
+          <h2>{t('attrGeneration', language)}</h2>
           <div>
             <Space>
-              属性点总和 =
+              {t('pointTotal', language)} =
               <InputNumber min={includeLuck ? 135 : 120} max={640} value={attrTotal} onChange={setAttrTotal} />
               <Checkbox
                 checked={includeLuck}
@@ -335,13 +423,13 @@ const App = () => {
                     setAttrTotal(135)
                   }
                 }}
-              />含幸运
+              />{t('includeLuck', language)}
               <Button
                 type="primary"
                 onClick={() => {
                   generateAttr()
                 }}>
-                随机5组
+                {t('generateBtn', language)}
               </Button>
             </Space>
           </div>
@@ -350,7 +438,7 @@ const App = () => {
             <List
               style={{ backgroundColor: '#FFFFFF' }}
               size="small"
-              header={<div>生成结果</div>}
+              header={<div>{t('generatedResult', language)}</div>}
               bordered
               dataSource={attribution}
               renderItem={item => <List.Item>{item}</List.Item>}
@@ -358,54 +446,54 @@ const App = () => {
           </div>
 
 
-          <h2><br></br>掷骰</h2>
+          <h2><br></br>{t('diceSection', language)}</h2>
           <Space size='middle'>
             <div>
-              投掷&nbsp;
+              {t('roll', language)}&nbsp;
               <Select defaultValue="6" style={{ width: 120 }} onChange={handleChange}>
-                <Option value="3">r3骰子</Option>
-                <Option value="4">r4骰子</Option>
-                <Option value="6">r6骰子</Option>
-                <Option value="8">r8骰子</Option>
-                <Option value="10">r10骰子</Option>
-                <Option value="20">r20骰子</Option>
-                <Option value="100">r100骰子</Option>
+                <Option value="3">{t('r3', language)}</Option>
+                <Option value="4">{t('r4', language)}</Option>
+                <Option value="6">{t('r6', language)}</Option>
+                <Option value="8">{t('r8', language)}</Option>
+                <Option value="10">{t('r10', language)}</Option>
+                <Option value="20">{t('r20', language)}</Option>
+                <Option value="100">{t('r100', language)}</Option>
               </Select>
-              ，共&nbsp;
+              ，{language === 'zh' ? '共' : ''}&nbsp;
               <InputNumber min={1} max={10} value={diceNumber} onChange={setDiceNumber} size='small' style={{ width: 50 }} />
-              &nbsp;次
+              &nbsp;{t('times', language)}
             </div>
             <Button
               type="primary"
               onClick={() => { throwDice(diceMax, diceNumber) }}>
-              掷骰子
+              {t('rollBtn', language)}
             </Button>
           </Space>
           <Space>
-            <p><br />您抛出了{diceNumber}个r{diceMax}骰子：结果为</p>
+            <p><br />{t('rollResult', language)}{diceNumber}{t('diceOf', language)}{diceMax}{t('diceResultText', language)}</p>
             <Statistic value={diceValue.toString()} style={{ color: '#003a8c' }} />
           </Space>
 
-          <h2><br />塔罗牌</h2>
+          <h2><br />{t('tarotSection', language)}</h2>
           <Space direction='vertical'>
             <Space wrap>
               <Button type="primary" onClick={() => { DrawSingleTarotCard() }}>
-                抽 1 张塔罗牌
+                {t('drawSingleCard', language)}
               </Button>
               <Button type="primary" onClick={() => { SacredTriangleSpread() }}>
-                圣三角牌阵
+                {t('sacredTriangle', language)}
               </Button>
               <Button type="primary" onClick={() => { FourElementsSpread() }}>
-                四要素牌阵
+                {t('fourElements', language)}
               </Button>
               <Button type="primary" onClick={() => { LittleCross() }}>
-                小十字牌阵
+                {t('littleCross', language)}
               </Button>
               <Button type="primary" onClick={() => { SixManifoldSpread() }}>
-                六芒星牌阵
+                {t('sixManifold', language)}
               </Button>
               <Button type="primary" onClick={() => { CelticCross() }}>
-                凯尔特十字牌阵
+                {t('celticCross', language)}
               </Button>
             </Space>
 
@@ -413,35 +501,35 @@ const App = () => {
           </Space>
 
 
-          <h2><br />技能检定</h2>
+          <h2><br />{t('skillSection', language)}</h2>
           <Space direction='vertical'>
             <Space wrap>
-              技能名称选择
+              {t('skillNameSelection', language)}
               <Select
-                defaultValue="侦查"
+                defaultValue={language === 'zh' ? "侦查" : "Spot Hidden"}
                 style={{ width: 120 }}
-                placeholder="选择要检定的技能"
+                placeholder={t('skillNameSelection', language)}
                 onChange={(value) => { setSkillName(value) }}
               >
                 {skillList.map(skill => (
                   <Option key={skill}>{skill}</Option>
                 ))}
               </Select>
-              或输入
+              {t('orInput', language)}
               <Input allowClear value={skillName} onChange={(e) => { setSkillName(e.target.value) }}
                 style={{ width: '120px' }} ></Input>
-              数值
+              {t('skillValue', language)}
               <InputNumber min={1} max={100} value={skillPoint} onChange={setSkillPoint} />
-              难度
-              <Select placeholder="检定难度" defaultValue="1.0" onChange={(value) => { setSkillRatio(Number(value)) }}>
-                <Option value="1.0">普通成功</Option>
-                <Option value="0.5">困难成功</Option>
-                <Option value="0.2">极难成功</Option>
+              {t('difficulty', language)}
+              <Select placeholder={t('difficulty', language)} defaultValue="1.0" onChange={(value) => { setSkillRatio(Number(value)) }}>
+                <Option value="1.0">{t('regularSuccess', language)}</Option>
+                <Option value="0.5">{t('hardSuccess', language)}</Option>
+                <Option value="0.2">{t('extremeSuccess', language)}</Option>
               </Select>
               <Button
                 type="primary"
                 onClick={() => { setSkillRes(skillUsingJudge(skillName, skillPoint, skillPointRatio)) }}>
-                进行检定
+                {t('checkBtn', language)}
               </Button>
             </Space>
             <Checkbox
@@ -451,10 +539,10 @@ const App = () => {
                 setSkillRes('')
               }}
             >
-              使用一般房规（1-5 大成功，96-100 大失败）
+              {t('useHouseRule', language)}
             </Checkbox>
             <div style={{ fontSize: 'smaller' }}>
-              * 当前规则：{useHouseRule ? '一般房规（1-5 大成功，96-100 大失败）' : '官方规则（1 大成功，100 大失败；技能值低于 50 时，96-100 大失败）'}
+              * {t('currentRule', language)}{useHouseRule ? t('houseRule', language) : t('officialRule', language)}
             </div>
             <div>{skillRes}</div>
           </Space>
@@ -463,8 +551,8 @@ const App = () => {
 
       <Layout style={{ textAlign: 'center', padding: '16px 0 24px' }} >
         <p>
-          Copyright © Sayaka-4987 2026<br />
-          Powered by React and Ant Design
+          {t('copyright', language)}<br />
+          {t('poweredBy', language)}
         </p>
       </Layout>
     </Layout>

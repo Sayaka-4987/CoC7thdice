@@ -1,0 +1,255 @@
+// 国际化翻译文件
+export const translations = {
+  zh: {
+    // 标题和菜单
+    title: 'CoC7th 规则用临时骰子',
+    language: '语言',
+    chinese: '中文',
+    english: 'English',
+
+    // 属性生成部分
+    attrGeneration: '人物卡9维属性生成',
+    pointTotal: '属性点总和',
+    includeLuck: '含幸运',
+    generateBtn: '随机5组',
+    generatedResult: '生成结果',
+    strength: '力量(STR)',
+    constitution: '体质(CON)',
+    size: '体型(SIZ)',
+    dexterity: '敏捷(DEX)',
+    appearance: '外貌(APP)',
+    intelligence: '智力/灵感(INT)',
+    power: '意志(POW)',
+    education: '教育/知识(EDU)',
+    luck: '幸运(LUCK)',
+
+    // 掷骰部分
+    diceSection: '掷骰',
+    roll: '投掷',
+    times: '次',
+    rollBtn: '掷骰子',
+    rollResult: '您抛出了',
+    diceOf: '个r',
+    diceResultText: '骰子：结果为',
+    r3: 'r3骰子',
+    r4: 'r4骰子',
+    r6: 'r6骰子',
+    r8: 'r8骰子',
+    r10: 'r10骰子',
+    r20: 'r20骰子',
+    r100: 'r100骰子',
+
+    // 塔罗牌部分
+    tarotSection: '塔罗牌',
+    drawSingleCard: '抽 1 张塔罗牌',
+    sacredTriangle: '圣三角牌阵',
+    fourElements: '四要素牌阵',
+    littleCross: '小十字牌阵',
+    sixManifold: '六芒星牌阵',
+    celticCross: '凯尔特十字牌阵',
+    tarotPrompt: '来都来了，抽个牌吧',
+    pastExperience: '过去的经验',
+    currentSituation: '问题的现状',
+    futurePredictor: '将来的预测',
+    fire: '火（行动力）',
+    water: '水（情感）',
+    earth: '土（现实）',
+    wind: '风（思想）',
+    past: '过去',
+    presentLeft: '现在(左)',
+    presentRight: '现在(右)',
+    future: '未来',
+    origin: '起因',
+    present: '现状',
+    countermeasure: '对策',
+    surroundings: '周遭',
+    attitude: '态度',
+    result: '结果',
+    questionStatus: '问题现状',
+    obstacleOrHelp: '障碍助力',
+    idealStatus: '理想状况',
+    basicCondition: '基础条件',
+    pastStatus: '过去状况',
+    futureDevelopment: '未来发展',
+    selfStatus: '自身现状',
+    environment: '周围环境',
+    hopeOrFear: '希望恐惧',
+    finalResult: '最终结果',
+
+    // 技能检定部分
+    skillSection: '技能检定',
+    skillNameSelection: '技能名称选择',
+    orInput: '或输入',
+    skillValue: '数值',
+    difficulty: '难度',
+    regularSuccess: '普通成功',
+    hardSuccess: '困难成功',
+    extremeSuccess: '极难成功',
+    checkBtn: '进行检定',
+    useHouseRule: '使用一般房规（1-5 大成功，96-100 大失败）',
+    currentRule: '当前规则：',
+    houseRule: '一般房规（1-5 大成功，96-100 大失败）',
+    officialRule: '官方规则（1 大成功，100 大失败；技能值低于 50 时，96-100 大失败）',
+    checkResultTemplate: '您进行了{skill}{point}检定：1D100={dice}，{result}',
+    success: '成功',
+    failure: '失败',
+    criticalSuccess: '大成功！',
+    criticalFailure: '大失败！',
+
+    // 技能列表
+    skills: {
+      'spot': 'Spot Hidden',
+      'listen': 'Listen',
+      'libraryUse': 'Library Use',
+      'nativeLanguage': 'Native Language',
+      'climb': 'Climb',
+      'dodge': 'Dodge',
+      'fight': 'Fight',
+      'locksmith': 'Locksmith',
+      'medicine': 'Medicine',
+      'shooting': 'Shooting',
+      'firstAid': 'First Aid',
+      'persuade': 'Persuade',
+      'charm': 'Charm',
+      'tactic': 'Oratory',
+      'intimidate': 'Intimidate',
+      'psychology': 'Psychology'
+    },
+
+    // 页脚
+    copyright: '© Sayaka-4987 2026',
+    poweredBy: '由 React 和 Ant Design 驱动'
+  },
+  en: {
+    // 标题和菜单
+    title: 'CoC7th Dice Helper',
+    language: 'Language',
+    chinese: '中文',
+    english: 'English',
+
+    // 属性生成部分
+    attrGeneration: 'Character Attributes Generation',
+    pointTotal: 'Total Attribute Points',
+    includeLuck: 'Include Luck',
+    generateBtn: 'Generate 5 Sets',
+    generatedResult: 'Results',
+    strength: 'Strength (STR)',
+    constitution: 'Constitution (CON)',
+    size: 'Size (SIZ)',
+    dexterity: 'Dexterity (DEX)',
+    appearance: 'Appearance (APP)',
+    intelligence: 'Intelligence/Insight (INT)',
+    power: 'Power (POW)',
+    education: 'Education/Knowledge (EDU)',
+    luck: 'Luck (LUCK)',
+
+    // 掷骰部分
+    diceSection: 'Dice Roller',
+    roll: 'Roll',
+    times: 'time(s)',
+    rollBtn: 'Roll Dice',
+    rollResult: 'You rolled',
+    diceOf: 'd',
+    diceResultText: 'dice: Result is',
+    r3: 'd3 die',
+    r4: 'd4 die',
+    r6: 'd6 die',
+    r8: 'd8 die',
+    r10: 'd10 die',
+    r20: 'd20 die',
+    r100: 'd100 die',
+
+    // 塔罗牌部分
+    tarotSection: 'Tarot Cards',
+    drawSingleCard: 'Draw 1 Tarot Card',
+    sacredTriangle: 'Sacred Triangle Spread',
+    fourElements: 'Four Elements Spread',
+    littleCross: 'Little Cross Spread',
+    sixManifold: 'Six-Pointed Star Spread',
+    celticCross: 'Celtic Cross Spread',
+    tarotPrompt: 'Here you are, draw a card!',
+    pastExperience: 'Past Experience',
+    currentSituation: 'Current Situation',
+    futurePredictor: 'Future Prediction',
+    fire: 'Fire (Action)',
+    water: 'Water (Emotion)',
+    earth: 'Earth (Reality)',
+    wind: 'Wind (Thought)',
+    past: 'Past',
+    presentLeft: 'Present (Left)',
+    presentRight: 'Present (Right)',
+    future: 'Future',
+    origin: 'Origin',
+    present: 'Present',
+    countermeasure: 'Countermeasure',
+    surroundings: 'Surroundings',
+    attitude: 'Attitude',
+    result: 'Result',
+    questionStatus: 'Question Status',
+    obstacleOrHelp: 'Obstacle or Help',
+    idealStatus: 'Ideal Status',
+    basicCondition: 'Basic Condition',
+    pastStatus: 'Past Status',
+    futureDevelopment: 'Future Development',
+    selfStatus: 'Self Status',
+    environment: 'Environment',
+    hopeOrFear: 'Hope or Fear',
+    finalResult: 'Final Result',
+
+    // 技能检定部分
+    skillSection: 'Skill Check',
+    skillNameSelection: 'Select Skill',
+    orInput: 'or input',
+    skillValue: 'value',
+    difficulty: 'Difficulty',
+    regularSuccess: 'Regular Success',
+    hardSuccess: 'Hard Success (50%)',
+    extremeSuccess: 'Extreme Success (20%)',
+    checkBtn: 'Check Skill',
+    useHouseRule: 'Use House Rule (1-5 Critical Success, 96-100 Critical Failure)',
+    currentRule: 'Current Rule: ',
+    houseRule: 'House Rule (1-5 Critical Success, 96-100 Critical Failure)',
+    officialRule: 'Official Rule (1 Critical Success, 100 Critical Failure; If skill < 50, 96-100 Critical Failure)',
+    checkResultTemplate: 'You made a {skill} check with {point}: 1D100={dice}, {result}',
+    success: 'Success',
+    failure: 'Failure',
+    criticalSuccess: 'Critical Success!',
+    criticalFailure: 'Critical Failure!',
+
+    // 技能列表
+    skills: {
+      'spot': 'Spot Hidden',
+      'listen': 'Listen',
+      'libraryUse': 'Library Use',
+      'nativeLanguage': 'Native Language',
+      'climb': 'Climb',
+      'dodge': 'Dodge',
+      'fight': 'Fight',
+      'locksmith': 'Locksmith',
+      'medicine': 'Medicine',
+      'shooting': 'Shooting',
+      'firstAid': 'First Aid',
+      'persuade': 'Persuade',
+      'charm': 'Charm',
+      'tactic': 'Oratory',
+      'intimidate': 'Intimidate',
+      'psychology': 'Psychology'
+    },
+
+    // 页脚
+    copyright: '© Sayaka-4987 2026',
+    poweredBy: 'Powered by React and Ant Design'
+  }
+};
+
+// 翻译函数
+export const t = (key, lang = 'zh', params = {}) => {
+  let text = translations[lang]?.[key] || translations.zh[key] || key;
+  
+  // 处理参数替换
+  Object.keys(params).forEach(param => {
+    text = text.replace(`{${param}}`, params[param]);
+  });
+  
+  return text;
+};
